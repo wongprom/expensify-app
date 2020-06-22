@@ -1,10 +1,6 @@
-// * named imports
-// import isSenior, { square, add } from './utils';
+import React from 'react';
+import ReactDOM from 'react-dom';
+// const template = React.createElement('p', {}, 'testin 1234regh reguhiurehg');
+const template = <p>this is jsx</p>;
 
-// console.log(square(5));
-// console.log(add(100, 50));
-import isSenior, { isAdult, canDrink } from './person';
-
-console.log(isAdult(18));
-console.log(canDrink(3));
-console.log(isSenior(65));
+ReactDOM.render(template, document.getElementById('app'));
