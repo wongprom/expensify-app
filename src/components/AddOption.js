@@ -11,6 +11,7 @@ class AddOption extends React.Component {
   addOptionFormHandler(e) {
     console.log('Add OptionFormHandler');
     e.preventDefault();
+    console.log(fdferf);
     const option = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(option);
     // this.setState(() => {
