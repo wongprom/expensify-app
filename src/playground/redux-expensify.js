@@ -25,7 +25,18 @@ const removeExpense = ({ id } = {}) => ({
   id,
 });
 // EDIT_EXPENSE
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates,
+});
+
 // SET_TEXT_FILTER
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT_FILTER',
+  text,
+});
+
 // SORT_BY_DATE
 // SORT_BY_AMOUNT
 // SET_START_DATE
@@ -39,6 +50,17 @@ const expensesReducer = (state = expensesReduserDefaultState, action) => {
       return [...state, action.expenses];
     case 'REMOVE_EXPENSE':
       return state.filter((expense) => expense.id !== action.id);
+    case 'EDIT_EXPENSE':
+      return state.map((expense) => {
+        if (expense.id === action.id) {
+          return {
+            ...expense,
+            ...action.updates,
+          };
+        } else {
+          return expense;
+        }
+      });
     default:
       return state;
   }
@@ -54,6 +76,11 @@ const filterReducerDefaultState = {
 };
 const filtersReducer = (state = filterReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      return {
+        ...state,
+        text: action.text,
+      };
     default:
       return state;
   }
@@ -85,8 +112,14 @@ const expenseTwo = store.dispatch(
   })
 );
 // console.log('expenseOne', expenseOne);
+// console.log('expenseTwo', expenseTwo);
 store.dispatch(removeExpense({ id: expenseOne.expenses.id }));
+store.dispatch(editExpense(expenseTwo.expenses.id, { amount: 1234456 }));
 
+store.dispatch(setTextFilter('Rent'));
+store.dispatch(setTextFilter());
+
+//!DEMO CODE
 const demoState = {
   expenses: [
     {
@@ -104,3 +137,14 @@ const demoState = {
     endDate: undefined,
   },
 };
+
+//! how to overwrite propertys in object with help of spread operator
+const user = {
+  name: 'Jimmy',
+  age: 34,
+};
+// console.log({
+//   ...user,
+//   location: 'Gotland',
+//   age: 38,
+// });
