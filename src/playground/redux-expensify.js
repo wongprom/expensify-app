@@ -120,6 +120,26 @@ const filtersReducer = (state = filterReducerDefaultState, action) => {
   }
 };
 
+// Get visible expenses
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter((expense) => {
+    // console.log(expense.description.toLowerCase());
+    // console.log(text.toLowerCase());
+    const startDateMatch =
+      typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch =
+      typeof endDate !== 'number' || expense.createdAt <= endDate;
+    // const textMatch = expenses.note.toLowerCase().inCludes(text.toLowerCase());
+    const textMatch = expense.description
+      .toLowerCase()
+      .includes(text.toLowerCase());
+
+    return startDateMatch && endDateMatch && textMatch;
+  });
+  // console.log('expenses', expenses);
+  // console.log('filters', filters);
+};
+
 // Store creation
 const store = new createStore(
   combineReducers({
@@ -129,36 +149,42 @@ const store = new createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log('visibleExpenses', visibleExpenses);
 });
 const expenseOne = store.dispatch(
   addExpense({
     amount: 4567,
-    description: 'FOOD',
+    description: 'rent',
     note: 'last food shoppping this month',
+    createdAt: 10000,
   })
 );
+
 const expenseTwo = store.dispatch(
   addExpense({
     amount: 9876,
     description: 'Car',
     note: 'My dream car Nissan GTR',
+    createdAt: -10000,
   })
 );
+
 // console.log('expenseOne', expenseOne);
 // console.log('expenseTwo', expenseTwo);
 // store.dispatch(removeExpense({ id: expenseOne.expenses.id }));
 // store.dispatch(editExpense(expenseTwo.expenses.id, { amount: 1234456 }));
 
-// store.dispatch(setTextFilter('Rent'));
+store.dispatch(setTextFilter('r'));
 // store.dispatch(setTextFilter());
 
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(1250));
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndDate(1250));
 
 //!DEMO CODE
 const demoState = {
