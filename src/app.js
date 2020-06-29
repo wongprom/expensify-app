@@ -27,6 +27,7 @@ setTimeout(() => {
 store.dispatch(
   addExpense({
     description: 'Water bill',
+    amount: 9876,
   })
 );
 // addExpenses -> Gas bill
