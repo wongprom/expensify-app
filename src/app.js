@@ -14,34 +14,33 @@ const store = configureStore();
 
 store.subscribe(() => {
   const state = store.getState();
-  console.log(state);
   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
   console.log('visibleExpenses', visibleExpenses);
 });
 
-setTimeout(() => {
-  store.dispatch(setTextFilter('bill'));
-}, 3000);
-
+//* Add Expense
 // addExpenses -> Water bill
 store.dispatch(
   addExpense({
     description: 'Water bill',
-    amount: 9876,
+    amount: 4500,
   })
 );
 // addExpenses -> Gas bill
 store.dispatch(
   addExpense({
     description: 'Gas bill',
-    amount: 1234,
-    note: 'gas bill for our "summer house"',
+    createdAt: 1000,
   })
 );
-// setTextFilters -> bill (2 item) -> water (1 item)
-store.dispatch(setTextFilter('water'));
-// getVisibleExpenses -> print visibles ones on screeen
-// console.log(store.getState());
+// addExpenses -> Rent
+store.dispatch(
+  addExpense({
+    description: 'Rent',
+    amount: 109500,
+  })
+);
+
 const jsx = (
   <Provider store={store}>
     <AppRouter />
