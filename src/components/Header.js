@@ -8,10 +8,10 @@ const Header = () => (
       Dashboard
     </NavLink>
     <NavLink to="/create" activeClassName="is-active">
-      CREATE
+      Create_Expense
     </NavLink>
     <NavLink to="/help" activeClassName="is-active">
-      HELP
+      Help
     </NavLink>
   </header>
 );
