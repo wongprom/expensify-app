@@ -10,6 +10,8 @@ import getVisibleExpenses from './selectores/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
+import uuid from 'uuid';
+
 const store = configureStore();
 
 store.subscribe(() => {
