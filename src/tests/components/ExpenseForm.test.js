@@ -11,7 +11,7 @@ test('should render ExpenseForm correctly', () => {
   expect(toJSON(wrapper)).toMatchSnapshot();
 });
 test('should render ExpenseForm with expense data', () => {
-  const wrapper = shallow(<ExpenseForm expense={{ ...expenses[1] }} />);
+  const wrapper = shallow(<ExpenseForm expense={expenses[1]} />);
   expect(toJSON(wrapper)).toMatchSnapshot();
 });
 test('should render error for invalid form submition', () => {
