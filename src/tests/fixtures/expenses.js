@@ -8,7 +8,7 @@ export default [
     createdAt: 0,
   },
   {
-    id: '',
+    id: '2',
     description: 'Rent',
     note: '',
     amount: 109500,
